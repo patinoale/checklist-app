@@ -12,12 +12,27 @@ const App = () => {
 
   ]);
 
+  const [inputValue, setInputValue] = useState('');
+
+  const handleAddButtonClick = () => {
+    const newItem = {
+      itemName: inputValue,
+      quantity: 1,
+      isSelected: false,
+    };
+
+    const newItems = [...items, newItem];
+
+    setItems(newItems);
+    setInputValue('');
+  };
+
 	return (
 		<div className='app-background'>
 			<div className='main-container'>
 				<div className='add-item-box'>
-					<input className='add-item-input' placeholder='Add an item...' />
-					<FontAwesomeIcon icon={faPlus} />
+					<input value={inputValue} onChange={(event) => setInputValue(event.target.value)} className='add-item-input' placeholder='Add an item...' />
+					<FontAwesomeIcon icon={faPlus} onClick={() => handleAddButtonClick()} />
 				</div>
 				<div className='item-list'>
           {items.map((item, index) => (
